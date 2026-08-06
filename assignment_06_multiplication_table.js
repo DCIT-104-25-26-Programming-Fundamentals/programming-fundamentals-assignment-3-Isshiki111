@@ -60,3 +60,31 @@
 // =============================================================================
 
 
+const readlineSync = require('readline-sync');
+
+function printTable(num) {
+    console.log("Multiplication Table for " + num + ":");
+    for (let i = 1; i <= 12; i++) {
+        console.log(num + " x " + i + " = " + (num * i));
+    }
+}
+
+function printTablesUpTo(n) {
+    for (let i = 1; i <= n; i++) {
+        printTable(i);
+        console.log("---------------------------");
+    }
+}
+
+function main() {
+    const num = readlineSync.questionInt("Enter a number: ");
+    if (num <= 0) {
+        console.log("Error: N must be a positive integer.");
+        return;
+    }
+    printTable(num);
+    console.log("\nBonus: Multiplication tables from 1 to " + num + ":");
+    printTablesUpTo(num);
+}
+
+main();

@@ -44,3 +44,55 @@
 // =============================================================================
 
 
+const readlineSync = require('readline-sync');
+
+function calculateSum(arr) {
+    let sum = 0;
+    for (let i = 0; i < arr.length; i++) {
+        sum += arr[i];
+    }
+    return sum;
+}
+
+function calculateAverage(arr) {
+    return calculateSum(arr) / arr.length;
+}
+
+function findMaximum(arr) {
+    let max = arr[0];
+    for (let i = 1; i < arr.length; i++) {
+        if (arr[i] > max) {
+            max = arr[i];
+        }
+    }
+    return max;
+}
+
+function findMinimum(arr) {
+    let min = arr[0];
+    for (let i = 1; i < arr.length; i++) {
+        if (arr[i] < min) {
+            min = arr[i];
+        }
+    }
+    return min;
+}
+
+function main() {
+    const n = readlineSync.questionInt("How many numbers? ");
+    if (n <= 0) {
+        console.log("Error: N must be a positive integer.");
+        return;
+    }
+    const arr = [];
+    for (let i = 0; i < n; i++) {
+        arr.push(readlineSync.questionInt("Enter number " + (i + 1) + ": "));
+    }
+    console.log("\nResults:");
+    console.log("Sum:     " + calculateSum(arr));
+    console.log("Average: " + calculateAverage(arr));
+    console.log("Maximum: " + findMaximum(arr));
+    console.log("Minimum: " + findMinimum(arr));
+}
+
+main();

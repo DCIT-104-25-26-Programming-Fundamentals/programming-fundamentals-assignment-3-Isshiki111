@@ -75,3 +75,71 @@
 // =============================================================================
 
 
+const readlineSync = require('readline-sync');
+
+function add(a, b) {
+    console.log("Result: " + a + " + " + b + " = " + (a + b).toFixed(2));
+}
+
+function subtract(a, b) {
+    console.log("Result: " + a + " - " + b + " = " + (a - b).toFixed(2));
+}
+
+function multiply(a, b) {
+    console.log("Result: " + a + " * " + b + " = " + (a * b).toFixed(2));
+}
+
+function divide(a, b) {
+    if (b === 0) {
+        console.log("Error: Cannot divide by zero.");
+        return;
+    }
+    console.log("Result: " + a + " / " + b + " = " + (a / b).toFixed(2));
+}
+
+function modulus(a, b) {
+    if (b === 0) {
+        console.log("Error: Cannot divide by zero.");
+        return;
+    }
+    console.log("Result: " + a + " % " + b + " = " + (a % b));
+}
+
+function exponentiation(a, b) {
+    console.log("Result: " + a + " ^ " + b + " = " + (a ** b).toFixed(2));
+}
+
+function main() {
+    let choice;
+    do {
+        console.log("\n============================");
+        console.log("     SIMPLE CALCULATOR");
+        console.log("============================");
+        console.log("1. Addition");
+        console.log("2. Subtraction");
+        console.log("3. Multiplication");
+        console.log("4. Division");
+        console.log("5. Modulus");
+        console.log("6. Exponentiation");
+        console.log("7. Quit");
+        choice = readlineSync.questionInt("Select an operation (1-7): ");
+        if (choice >= 1 && choice <= 6) {
+            const a = readlineSync.questionFloat("Enter first number: ");
+            const b = readlineSync.questionFloat("Enter second number: ");
+            switch (choice) {
+                case 1: add(a, b); break;
+                case 2: subtract(a, b); break;
+                case 3: multiply(a, b); break;
+                case 4: divide(a, b); break;
+                case 5: modulus(a, b); break;
+                case 6: exponentiation(a, b); break;
+            }
+        } else if (choice === 7) {
+            console.log("Goodbye!");
+        } else {
+            console.log("Invalid choice. Please enter 1-7.");
+        }
+    } while (choice !== 7);
+}
+
+main();

@@ -70,3 +70,97 @@
 
 const readlineSync = require('readline-sync');
 
+function transpose() {
+    const m = readlineSync.questionInt("Enter number of rows: ");
+    const n = readlineSync.questionInt("Enter number of columns: ");
+    const matrix = [];
+    for (let i = 0; i < m; i++) {
+        const row = readlineSync.question("Enter row " + (i + 1) + ": ").split(' ').map(Number);
+        matrix.push(row);
+    }
+    const trans = [];
+    for (let i = 0; i < n; i++) {
+        trans[i] = [];
+        for (let j = 0; j < m; j++) {
+            trans[i][j] = matrix[j][i];
+        }
+    }
+    console.log("Original Matrix:");
+    for (let i = 0; i < m; i++) {
+        console.log(matrix[i].join('  '));
+    }
+    console.log("Transposed Matrix:");
+    for (let i = 0; i < n; i++) {
+        console.log(trans[i].join('  '));
+    }
+}
+
+function addMatrices() {
+    const m = readlineSync.questionInt("Enter number of rows: ");
+    const n = readlineSync.questionInt("Enter number of columns: ");
+    console.log("Enter first matrix:");
+    const a = [];
+    for (let i = 0; i < m; i++) {
+        a.push(readlineSync.question("Enter row " + (i + 1) + ": ").split(' ').map(Number));
+    }
+    console.log("Enter second matrix:");
+    const b = [];
+    for (let i = 0; i < m; i++) {
+        b.push(readlineSync.question("Enter row " + (i + 1) + ": ").split(' ').map(Number));
+    }
+    console.log("Sum Matrix:");
+    for (let i = 0; i < m; i++) {
+        const row = [];
+        for (let j = 0; j < n; j++) {
+            row.push(a[i][j] + b[i][j]);
+        }
+        console.log(row.join('  '));
+    }
+}
+
+function multiplyMatrices() {
+    const m = readlineSync.questionInt("Enter rows of first matrix: ");
+    const n = readlineSync.questionInt("Enter columns of first matrix: ");
+    const p = readlineSync.questionInt("Enter columns of second matrix: ");
+    console.log("Enter first matrix:");
+    const a = [];
+    for (let i = 0; i < m; i++) {
+        a.push(readlineSync.question("Enter row " + (i + 1) + ": ").split(' ').map(Number));
+    }
+    console.log("Enter second matrix:");
+    const b = [];
+    for (let i = 0; i < n; i++) {
+        b.push(readlineSync.question("Enter row " + (i + 1) + ": ").split(' ').map(Number));
+    }
+    const prod = [];
+    for (let i = 0; i < m; i++) {
+        prod[i] = [];
+        for (let j = 0; j < p; j++) {
+            prod[i][j] = 0;
+            for (let k = 0; k < n; k++) {
+                prod[i][j] += a[i][k] * b[k][j];
+            }
+        }
+    }
+    console.log("Product Matrix:");
+    for (let i = 0; i < m; i++) {
+        console.log(prod[i].join('  '));
+    }
+}
+
+function main() {
+    console.log("Matrix Operations:");
+    console.log("1. Transpose");
+    console.log("2. Add Matrices");
+    console.log("3. Multiply Matrices");
+    const choice = readlineSync.questionInt("Enter choice: ");
+    switch (choice) {
+        case 1: transpose(); break;
+        case 2: addMatrices(); break;
+        case 3: multiplyMatrices(); break;
+        default: console.log("Invalid choice.");
+    }
+}
+
+main();
+
